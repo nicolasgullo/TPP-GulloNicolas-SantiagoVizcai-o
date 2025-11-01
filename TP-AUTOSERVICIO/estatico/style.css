@@ -65,5 +65,36 @@ body{
 }
 
 .productos{
-    
+    display: grid;
+    grid-template-areas: "nav" "header" "section";
+    grid-template-rows: repeat(1,1fr);
+    height: 100vh;
+    background-color: red;
+    color: #333;
+}
+
+nav{
+    grid-area: nav;
+    background-color: white;
+    color: white;
+    padding: 10px;
+    text-align: center;
+}
+
+.logo{
+    width: 80px;
+    height: 80px;
+}
+
+header{
+    grid-area: header;
+    background-color: #555;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+section{
+    grid-area: section;
+    padding: 20px;
+    overflow-y: auto;
 }
