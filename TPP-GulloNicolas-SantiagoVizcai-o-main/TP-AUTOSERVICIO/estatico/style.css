@@ -1,0 +1,164 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: "Montserrat", sans-serif;
+    color: white;
+}
+
+#fuente-especial {
+    font-family: "Shrikhand", serif;
+}
+
+.index {
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    height: 100vh;
+    background-image:linear-gradient(rgba(5, 7, 12, 0.75), rgba(5, 7, 12, 0.75)),url(./img/posible.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+.index-section {
+    display: grid;
+    grid-template-rows: 1fr 2fr 1fr;
+    text-align: center;
+}
+
+.index-titulo {
+    font-size: 30px;
+    grid-row: 1;
+}
+
+.index-formulario {
+    display: flex;
+    flex-direction: column;
+    grid-row: 2;
+    align-self: center;
+    justify-self: center;
+    gap: 10px;
+}
+
+#btnContinuar {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: steelblue;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#btnContinuar:hover {
+    background-color: deepskyblue;
+}
+
+#nombreCliente {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.index-formulario p {
+    margin: 0;
+    font-size: 18px;
+}
+
+.productos{
+    display: grid;
+    grid-template-areas: "nav" "header" "section";
+    grid-template-rows: repeat(1,1fr);
+    height: 100vh;
+    background-color: beige;
+    color: #333;
+}
+/* --- Barra superior --- */
+.nav .borde {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 2px solid black;
+  padding: 5px;
+  background-color: white;
+}
+
+.menu {
+  display: flex;
+  gap: 20px;
+}
+.carrito button {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* --- Sidebar del carrito --- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  right: -500px; /* ✅ fuera completamente de la pantalla */
+  width: 300px;
+  height: 100vh;
+  background-color: #fff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  transition: right 0.3s ease-in-out;
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+/* --- Mostrar sidebar --- */
+.sidebar.abierto {
+  right: 0;
+}
+
+/* --- Botón de cerrar --- */
+.cerrar-btn {
+  background: none;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+#overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+}
+
+#overlay.visible {
+  display: block;
+}
+
+
+
+/* nav{
+    grid-area: nav;
+    background-color:beige;
+    color: white;
+    padding: 10px;
+    text-align: center;
+} */
+
+.logo{
+    width: 80px;
+    height: 80px;
+}
+
+header{
+    grid-area: header;
+    background-color: #555;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+section{
+    grid-area: section;
+    padding: 20px;
+    overflow-y: auto;
+}
