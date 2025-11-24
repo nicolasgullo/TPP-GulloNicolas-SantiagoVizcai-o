@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./estilos/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="./img/LOGO.png">
+    <script src="https://kit.fontawesome.com/85fc43103c.js" crossorigin="anonymous"></script>
+    <title>Ticket - Bussy</title>
+</head>
+<body class="body-productos">
+    <main class="productos">
+        <a href="./index.html" class="bussy-nav">Bussy</a>
+        <nav>
+            <a href="./index.html">INICIO</a>
+            <a href="./productos.html">PRODUCTOS</a>
+        </nav>
+        <div class="iconos-nav">
+            <button class="btnTema">
+                <i class="fa-solid fa-sun"></i>
+                <i class="fa-regular fa-moon"></i>
+            </button>
+            <a href="./carrito.html" class="carrito-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>  
+        </div>
+        <div class="marquesina">
+            <div class="texto">
+                <span>• ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS •</span>
+            </div>
+        </div>
+        <header class="productos-header">
+            <h1>Ticket de compra</h1>
+        </header>
+        <section class="ticket-section">
+            <div class="ticket-datos">
+                <p><strong>Empresa:</strong> Bussy Company</p>
+                <p><strong>Cliente:</strong> <span id="ticket-nombre-cliente"></span></p>
+                <p><strong>Fecha:</strong> <span id="ticket-fecha"></span></p>
+            </div>
+            <div class="ticket-detalle">
+                <table class="ticket-tabla">
+                    <thead>
+                        <tr>
+                            <th>Producto</th>
+                            <th>Talle</th>
+                            <th>Cant.</th>
+                            <th>Precio</th>
+                            <th>Subtotal</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ticket-body">
+                        <!-- Filas de productos -->
+                    </tbody>
+                </table>
+                <p class="ticket-total">
+                    Total: $<span id="ticket-total"></span>
+                </p>
+            </div>
+            <div class="ticket-acciones">
+                <button id="btnDescargarPdf" class="btn-admin btn-admin-secondary">
+                    Descargar PDF
+                </button>
+                <button id="btnSalir" class="btn-admin btn-admin-primary">
+                    Salir
+                </button>
+            </div>
+        </section>
+    </main>
+    <script src="./js/tema.js"></script>
+    <script src="./js/ticket.js"></script>
+</body>
+</html>

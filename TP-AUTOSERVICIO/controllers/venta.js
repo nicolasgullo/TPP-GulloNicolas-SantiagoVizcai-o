@@ -3,11 +3,9 @@ import { Venta, VentaProducto } from "../models/index.js";
 export const createVenta = async (req, res) => {
     try {
         const { nombreComprador, fecha, total, productos } = req.body;
-        // productos: array de { productoId, cantidad, precioUnitario }
 
         const venta = await Venta.create({ nombreComprador, fecha, total });
 
-        // crear los registros en la tabla intermedia
         await Promise.all(
         productos.map((p) =>
             VentaProducto.create({

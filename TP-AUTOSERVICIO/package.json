@@ -1,0 +1,22 @@
+{
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "multer": "^2.0.2",
+    "mysql2": "^3.15.3",
+    "node": "^25.2.0",
+    "puppeteer": "^24.31.0",
+    "sequelize": "^6.37.7"
+  },
+  "name": "tp-autoservicio",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Gullo-Vizcaiño",
+  "license": "ISC"
+}

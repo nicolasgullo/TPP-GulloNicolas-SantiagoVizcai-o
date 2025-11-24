@@ -4,9 +4,9 @@ export const createProducto = async (req, res) => {
     try {
         const { name, imagen, precio, tipo, activo, descripcion} = req.body;
 
-        console.log({ name, imagen, precio, tipo, activo, descripcion });
+        console.log({ name, imagenPrincipal, imagenHover, precio, tipo, activo, talle });
 
-        const producto = await Producto.create({ name, imagen, precio, tipo, activo, descripcion });
+        const producto = await Producto.create({ name, imagenPrincipal, imagenHover, precio, tipo, activo, talle });
 
         console.log({ producto });
 
@@ -34,17 +34,26 @@ export const getProducto = async (req, res) => {
 
 export const getProductos = async (req, res) => {
     try {
-        const productos = await Producto.findAll();
+        const { activos } = req.query;
+
+        const where = {};
+        if (activos === 'true') {
+            where.activo = true;
+        } else if (activos === 'false') {
+            where.activo = false;
+        }
+
+        const productos = await Producto.findAll(Object.keys(where).length ? { where } : undefined);
         res.send(productos);
     } catch (error) {
-        res.send(error);
+        res.status(500).send(error);
     }
 };
 
 export const updateProducto = async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, imagen, precio, tipo, activo, descripcion } = req.body;
+        const { name, imagenPrincipal, imagenHover, precio, tipo, activo, talle } = req.body;
 
         const producto = await Producto.findByPk(id);
 
@@ -52,7 +61,7 @@ export const updateProducto = async (req, res) => {
             return res.status(404).send("Producto no encontrado");
         }
 
-        await producto.update({ name, imagen, precio, tipo, activo, descripcion });
+        await producto.update({ name, imagenPrincipal, imagenHover, precio, tipo, activo, talle });
 
         res.send(producto);
     } catch (error) {

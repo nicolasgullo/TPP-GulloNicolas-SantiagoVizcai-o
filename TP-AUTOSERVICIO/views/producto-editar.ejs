@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/estatico/estilos/style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="/estatico/img/LOGO.png">
+    <title>Editar Producto - Bussy</title>
+</head>
+<body>
+    <main class="admin-main">
+        <section class="admin-section">
+            <header class="admin-header">
+                <h1>Editar producto</h1>
+                <p>Modificá los datos del artículo seleccionado.</p>
+            </header>
+            <div class="admin-form-wrapper">
+                <% if (error) { %>
+                    <p class="admin-form-error"><%= error %></p>
+                <% } %>
+                <form
+                    class="admin-form"
+                    method="post"
+                    action="/admin/productos/<%= producto.id %>/editar"
+                    enctype="multipart/form-data"
+                >
+                    <div class="admin-form-grid">
+                        <div class="admin-form-group admin-form-group-full">
+                            <label for="name">Nombre</label>
+                            <input
+                                type="text"
+                                id="name"
+                                name="name"
+                                value="<%= producto.name %>"
+                                required
+                            >
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="precio">Precio</label>
+                            <input
+                                type="number"
+                                id="precio"
+                                name="precio"
+                                min="0"
+                                step="1"
+                                value="<%= producto.precio %>"
+                                required
+                            >
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="tipo">Tipo</label>
+                            <select id="tipo" name="tipo" required>
+                                <option value="">Seleccione...</option>
+                                <option value="remera" <%= producto.tipo === "remera" ? "selected" : "" %>>Remera</option>
+                                <option value="pantalon" <%= producto.tipo === "pantalon" ? "selected" : "" %>>Pantalón</option>
+                            </select>
+                        </div>
+                        <div class="admin-form-group">
+                            <label for="talle">Talle</label>
+                            <select id="talle" name="talle" required>
+                                <option value="M"  <%= producto.talle === "M"  ? "selected" : "" %>>M</option>
+                                <option value="L"  <%= producto.talle === "L"  ? "selected" : "" %>>L</option>
+                                <option value="XL" <%= producto.talle === "XL" ? "selected" : "" %>>XL</option>
+                            </select>
+                        </div>
+                        <div class="admin-form-group admin-form-group-full">
+                            <label>Imagen principal actual</label>
+                            <div class="preview-imagen">
+                                <img
+                                    src="<%= producto.imagenPrincipal %>"
+                                    alt="<%= producto.name %>"
+                                >
+                            </div>
+                        </div>
+                        <div class="admin-form-group admin-form-group-full">
+                            <label for="imagenPrincipal">Cambiar imagen principal (opcional)</label>
+                            <input
+                                type="file"
+                                id="imagenPrincipal"
+                                name="imagenPrincipal"
+                                accept="image/*"
+                            >
+                        </div>
+                        <div class="admin-form-group admin-form-group-full">
+                            <label>Imagen hover actual</label>
+                            <div class="preview-imagen">
+                                <img
+                                    src="<%= producto.imagenHover %>"
+                                    alt="<%= producto.name %>"
+                                >
+                            </div>
+                        </div>
+                        <div class="admin-form-group admin-form-group-full">
+                            <label for="imagenHover">Cambiar imagen hover (opcional)</label>
+                            <input
+                                type="file"
+                                id="imagenHover"
+                                name="imagenHover"
+                                accept="image/*"
+                            >
+                        </div>
+                        <div class="admin-form-group admin-form-switch">
+                            <span>Estado</span>
+                            <label class="switch-label">
+                                <input
+                                    type="checkbox"
+                                    id="activo"
+                                    name="activo"
+                                    <%= producto.activo ? "checked" : "" %>
+                                >
+                                <span class="switch-slider"></span>
+                                <span class="switch-text">
+                                    <%= producto.activo ? "Activo" : "Inactivo" %>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="admin-form-actions">
+                        <a href="/admin/dashboard" class="btn-admin btn-admin-secondary">
+                            Volver al panel
+                        </a>
+                        <button type="submit" class="btn-admin btn-admin-primary">
+                            Guardar cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

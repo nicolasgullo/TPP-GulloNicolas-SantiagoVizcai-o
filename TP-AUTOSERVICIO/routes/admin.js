@@ -1,18 +1,15 @@
-// routes/admin.js
 import { Router } from "express";
 import multer from "multer";
 import { Producto } from "../models/index.js";
 
 const router = Router();
 
-/* ========== MULTER PARA DOS IMÁGENES ========== */
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, "estatico/uploads"); // carpeta donde se guardan las imágenes
+        cb(null, "estatico/uploads");
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + "-" + file.originalname); // nombre único
+        cb(null, Date.now() + "-" + file.originalname);
     },
 });
 
@@ -46,14 +43,12 @@ router.get("/dashboard", async (req, res) => {
     }
 });
 
-/* ========== ALTA PRODUCTO (2 IMÁGENES) ========== */
+/* ========== ALTA PRODUCTO ========== */
 
-// GET formulario
 router.get("/productos/alta", (req, res) => {
     res.render("producto-alta", { error: null });
 });
 
-// POST con dos archivos: imagenPrincipal e imagenHover
 router.post(
     "/productos/alta",
     upload.fields([
@@ -64,7 +59,6 @@ router.post(
         try {
         const { name, precio, tipo, activo, descripcion, talle } = req.body;
 
-        // multer deja los archivos en req.files
         const imagenPrincipalFile =
             req.files?.imagenPrincipal?.[0] || null;
         const imagenHoverFile =
@@ -121,7 +115,6 @@ router.get("/productos/:id/editar", async (req, res) => {
     }
 });
 
-// POST /admin/productos/:id/editar → actualiza el producto (con imágenes opcionales)
 router.post(
     "/productos/:id/editar",
     upload.fields([
@@ -138,17 +131,14 @@ router.post(
             return res.status(404).send("Producto no encontrado");
         }
 
-        // Por defecto, mantener las imágenes actuales
         let imagenPrincipalPath = producto.imagenPrincipal;
         let imagenHoverPath = producto.imagenHover;
 
-        // Si se subió una nueva imagen principal, la reemplazamos
         const imagenPrincipalFile = req.files?.imagenPrincipal?.[0] || null;
         if (imagenPrincipalFile) {
             imagenPrincipalPath = "/estatico/uploads/" + imagenPrincipalFile.filename;
         }
 
-        // Si se subió una nueva imagen hover, la reemplazamos
         const imagenHoverFile = req.files?.imagenHover?.[0] || null;
         if (imagenHoverFile) {
             imagenHoverPath = "/estatico/uploads/" + imagenHoverFile.filename;

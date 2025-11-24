@@ -11,21 +11,19 @@ export const Producto = sequelize.define(
         },
         name: {
         type: DataTypes.STRING,
-        allowNull: false, // NOT NULL
+        allowNull: false,
         },
-        // imagen principal
         imagenPrincipal: {
         type: DataTypes.STRING,
         allowNull: false,
         },
-        // imagen que se verá en el hover
         imagenHover: {
         type: DataTypes.STRING,
         allowNull: false,
         },
         precio: {
         type: DataTypes.INTEGER,
-        allowNull: false, // NOT NULL
+        allowNull: false,
         },
         tipo: {
         type: DataTypes.ENUM('remera', 'pantalon'),
@@ -38,10 +36,6 @@ export const Producto = sequelize.define(
         },
         talle: {
         type: DataTypes.ENUM("M", "L", "XL"),
-        allowNull: false,
-        },
-        descripcion: {
-        type: DataTypes.STRING,
         allowNull: false,
         }
     }

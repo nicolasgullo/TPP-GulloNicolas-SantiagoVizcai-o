@@ -8,12 +8,19 @@
     <script src="https://kit.fontawesome.com/85fc43103c.js" crossorigin="anonymous"></script>
     <title>Bussy</title>
 </head>
-<body>
+<body class="body-productos">
     <main class="productos">
         <a href="./index.html" class="bussy-nav">Bussy</a>
         <nav>
             <a href="./index.html">INICIO</a>
-            <a href="./productos.html">PRODUCTOS</a>
+            <div class="menu">
+                <a href="./productos.html" class="menu-btn">PRODUCTOS ▾</a>
+                <div class="menu-content">
+                    <a href="#" data-tipo="todos" class="filtro-tipo">Todos</a>
+                    <a href="#" data-tipo="remera" class="filtro-tipo">Remeras</a>
+                    <a href="#" data-tipo="pantalon" class="filtro-tipo">Pantalones</a>
+                </div>
+            </div>
         </nav>
         <div class="iconos-nav">
             <button class="btnTema"><i class="fa-solid fa-sun"></i><i class="fa-regular fa-moon"></i></button>
@@ -24,16 +31,26 @@
                 <span>• ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS • ®BUSSY COMPANY • ENVIOS GRATIS EN TODAS SUS COMPRAS •</span>
             </div>
         </div>
-        <header class="productos-header">
-            <h1>Productos</h1>
+            <button id="btnOrdenAlf">
+                <i class="fa-solid fa-arrow-down-a-z"></i>
+                <i class="fa-solid fa-arrow-up-z-a"></i>
+            </button>
+            <header class="productos-header">
+                <h1>Productos</h1>
+            </header>
             <button id="btnOrden"><i class="fa-solid fa-arrow-right-arrow-left fa-rotate-90"></i> $</button>
-            <button id="btnOrdenAlf"><i class="fa-solid fa-arrow-down-a-z"></i><i class="fa-solid fa-arrow-up-z-a"></i></button>
-        </header>
         <section class="productos-section">
             <div id="lista-productos">
                 <!-- Los productos se cargan aca -->
             </div>
+            <div class="paginacion">
+                <button class="anterior">Anterior</button>
+                <button class="siguiente">Siguiente</button>
+            </div>
         </section>
     </main>
+    <script src="./js/main.js"></script>
+    <script src="./js/tema.js"></script>
+    <script src="./js/filtros.js"></script>
 </body>
 </html>
