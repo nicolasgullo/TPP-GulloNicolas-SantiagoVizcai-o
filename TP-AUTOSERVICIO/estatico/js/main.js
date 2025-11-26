@@ -14,7 +14,6 @@ let ordenPrecioAsc = true;
 let ordenNombreAsc = true;
 let filtroActual = "todos"; 
 
-// CARGA INICIAL
 async function cargarProductos() {
     try {
         const respuesta = await fetch("/api/productos?activos=true");
@@ -35,7 +34,6 @@ async function cargarProductos() {
     }
 }
 
-// RENDER + PAGINACION
 function renderizarPagina() {
     const totalPaginas = Math.ceil(productosFiltrados.length / productosPorPagina);
     if (paginaActual > totalPaginas && totalPaginas > 0) {
@@ -64,7 +62,6 @@ function actualizarBotones() {
     btnSiguiente.disabled = paginaActual === totalPaginas || totalPaginas === 0;
 }
 
-// CREAR CARD
 function crearCardProducto(p) {
     const card = document.createElement("article");
     card.classList.add("card-producto", "producto");
@@ -115,7 +112,6 @@ function crearCardProducto(p) {
     return card;
 }
 
-// CARRITO
 function agregarAlCarrito(p) {
     const KEY = "carrito";
     const carrito = JSON.parse(localStorage.getItem(KEY)) || [];
@@ -136,7 +132,6 @@ function agregarAlCarrito(p) {
     alert(`Producto agregado: ${p.name}`);
 }
 
-// PAGINACIÓN (BOTONES)
 btnAnterior.addEventListener("click", () => {
     if (paginaActual > 1) {
         paginaActual--;
@@ -152,7 +147,6 @@ btnSiguiente.addEventListener("click", () => {
     }
 });
 
-// ORDENAR POR PRECIO
 btnOrden.addEventListener("click", () => {
     ordenPrecioAsc = !ordenPrecioAsc;
     productosFiltrados.sort((a, b) => {
@@ -164,7 +158,6 @@ btnOrden.addEventListener("click", () => {
     renderizarPagina();
 });
 
-// ORDENAR ALFABÉTICO
 if (iconDownAZ && iconUpZA) {
     iconDownAZ.style.display = "inline";
     iconUpZA.style.display = "none";
@@ -194,7 +187,6 @@ btnOrdenAlf.addEventListener("click", () => {
     renderizarPagina();
 });
 
-// FILTROS
 function aplicarFiltroPorTipo(tipo) {
     filtroActual = tipo;
 

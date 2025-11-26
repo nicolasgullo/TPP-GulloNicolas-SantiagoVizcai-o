@@ -1,6 +1,10 @@
 import { Router } from "express";
 import multer from "multer";
-import { Producto } from "../models/index.js";
+import bcrypt from "bcrypt";
+import { Producto, User } from "../models/index.js";
+import {validarLoginAdmin, validarProductoAlta, validarProductoEditar} from "../middleware/validaciones.js";
+import { verificarToken } from "../middleware/auth.js";
+import jwt from "jsonwebtoken";
 
 const router = Router();
 
@@ -21,19 +25,52 @@ router.get("/login", (req, res) => {
     res.render("login", { error: null });
 });
 
-router.post("/login", (req, res) => {
-    const { email, password } = req.body;
+router.post("/login", validarLoginAdmin, async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-    if (email === "admin@admin.com" && password === "123456") {
+        const admin = await User.findOne({ where: { email } });
+
+        if (!admin) {
+        return res
+            .status(401)
+            .render("login", { error: "Credenciales inválidas" });
+        }
+
+        const ok = await bcrypt.compare(password, admin.password);
+
+        if (!ok) {
+        return res
+            .status(401)
+            .render("login", { error: "Credenciales inválidas" });
+        }
+
+        const payload = {
+        id: admin.idUser,
+        email: admin.email,
+        };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, {
+            expiresIn: "24h",
+        });
+
+        res.cookie("adminToken", token, {
+        httpOnly: true,
+        maxAge: 24 * 60 * 60 * 1000, // 24hs
+        });
+
         return res.redirect("/admin/dashboard");
+    } catch (error) {
+        console.error(error);
+        return res
+        .status(500)
+        .render("login", { error: "Error al procesar el login" });
     }
-
-    res.status(401).render("login", { error: "Credenciales inválidas" });
 });
 
 /* ========== DASHBOARD ========== */
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard", verificarToken, async (req, res) => {
     try {
         const productos = await Producto.findAll();
         res.render("dashboard", { productos });
@@ -45,12 +82,12 @@ router.get("/dashboard", async (req, res) => {
 
 /* ========== ALTA PRODUCTO ========== */
 
-router.get("/productos/alta", (req, res) => {
+router.get("/productos/alta", verificarToken, (req, res) => {
     res.render("producto-alta", { error: null });
 });
 
 router.post(
-    "/productos/alta",
+    "/productos/alta", verificarToken, validarProductoAlta,
     upload.fields([
         { name: "imagenPrincipal", maxCount: 1 },
         { name: "imagenHover", maxCount: 1 },
@@ -99,7 +136,7 @@ router.post(
     }
 );
 
-router.get("/productos/:id/editar", async (req, res) => {
+router.get("/productos/:id/editar", verificarToken, async (req, res) => {
     try {
         const { id } = req.params;
         const producto = await Producto.findByPk(id);
@@ -116,7 +153,7 @@ router.get("/productos/:id/editar", async (req, res) => {
 });
 
 router.post(
-    "/productos/:id/editar",
+    "/productos/:id/editar", verificarToken, validarProductoEditar,
     upload.fields([
         { name: "imagenPrincipal", maxCount: 1 },
         { name: "imagenHover", maxCount: 1 },
@@ -168,5 +205,12 @@ router.post(
         }
     }
 );
+
+/* ========== LOGOUT ADMIN ========== */
+
+router.get("/logout", (req, res) => {
+    res.clearCookie("adminToken");
+    res.redirect("/admin/login");
+});
 
 export default router;

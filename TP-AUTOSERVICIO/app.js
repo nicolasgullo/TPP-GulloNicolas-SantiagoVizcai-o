@@ -1,17 +1,22 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
-
 import productosRouter from "./routes/producto.js";
 import usuariosRouter from "./routes/usuario.js";
 import ventasRouter from "./routes/venta.js";
 import adminRouter from "./routes/admin.js";
 import ticketRouter from "./routes/ticket.js";
+import cookieParser from "cookie-parser";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const app = express();
+
+app.use(cookieParser());
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));

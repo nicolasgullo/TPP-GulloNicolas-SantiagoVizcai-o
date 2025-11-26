@@ -2,13 +2,9 @@ import { Producto } from "../models/productos.js";
 
 export const createProducto = async (req, res) => {
     try {
-        const { name, imagen, precio, tipo, activo, descripcion} = req.body;
-
-        console.log({ name, imagenPrincipal, imagenHover, precio, tipo, activo, talle });
+        const { name, imagenPrincipal, imagenHover, precio, tipo, activo, talle} = req.body;
 
         const producto = await Producto.create({ name, imagenPrincipal, imagenHover, precio, tipo, activo, talle });
-
-        console.log({ producto });
 
         res.send(producto);
     } catch (error) {

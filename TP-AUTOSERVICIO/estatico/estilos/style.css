@@ -290,7 +290,7 @@ body.dark-theme .iconos-nav {
 
 #btnOrdenAlf {
     font-weight: bold;
-    font-size: 21px;
+    font-size: 22px;
     cursor: pointer;
     background: none;
     border: none;
@@ -831,7 +831,21 @@ body.dark-theme .ticket-detalle {
 .admin-table td {
     padding: .55rem .6rem;
     text-align: left;
+    border-bottom: none;
+}
+
+.admin-table tr {
+    position: relative;
+}
+
+.admin-table tr::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
     border-bottom: 1px solid rgba(255,255,255,.18);
+    pointer-events: none;
 }
 
 .admin-table th {
@@ -847,6 +861,7 @@ body.dark-theme .ticket-detalle {
     display: flex;
     flex-wrap: wrap;
     gap: .3rem;
+    align-items: center;
 }
 
 .btn-admin {
@@ -1099,4 +1114,279 @@ body.dark-theme .ticket-detalle {
     height: auto;
     border-radius: 8px;
     object-fit: cover;
+}
+
+.btn-autofill {
+    padding: 12px 14px;
+    border: none;
+    border-radius: 10px;
+    background-color: #00b894;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background-color .2s ease, transform .05s ease;
+}
+
+.btn-autofill:hover {
+    background-color: #1dd1a1;
+}
+
+.login-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.login-actions #btnLogin,
+.login-actions .btn-autofill {
+    flex: 1;
+}
+
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+
+/* ===== INDEX ===== */
+#btnAdmin {
+    position: static;
+    display: block;
+    margin: 20px auto 0;
+    width: 80%;
+    text-align: center;
+}
+
+.index-section {
+    grid-template-rows: auto auto auto;
+    height: auto;
+    padding: 40px 20px;
+}
+
+.index-formulario {
+    width: 100%;
+    max-width: 350px;
+}
+
+.productos {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: auto;
+}
+
+.bussy-nav {
+    order: 1;
+    font-size: 24px;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 0;
+}
+
+nav {
+    order: 2;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid grey;
+}
+
+.iconos-nav {
+    order: 3;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px 0;
+}
+
+.btnTema {
+    padding-right: 0;
+}
+
+.productos-header {
+    order: 4;
+    text-align: center;
+    margin-top: 10px;
+}
+
+#btnOrdenAlf {
+    order: 5;
+    align-self: center;
+    margin: 4px 6px;
+    display: inline-flex;
+    font-size: 24px;
+}
+
+#btnOrden {
+    order: 6;
+    align-self: center;
+    margin: 4px 6px 10px;
+    display: inline-flex;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.productos-section,
+.carrito-section,
+.ticket-section {
+    order: 7;
+    padding: 16px 10px 80px;
+}
+
+.marquesina {
+    order: 99;
+    font-size: 0.85rem;
+    padding: 8px 0;
+}
+
+.texto span {
+    font-size: 0.85rem;
+}
+
+/* ===== LISTA DE PRODUCTOS ===== */
+#lista-productos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.9rem;
+    padding: 10px;
+    justify-items: center;
+}
+
+.card-producto {
+    width: 100%;
+    max-width: 220px;
+}
+
+.card-img-wrap {
+    height: 260px;
+}
+
+.precio-producto {
+    margin: 1rem auto 1.5rem;
+}
+
+/* ===== CARRITO ===== */
+.carrito-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 20px 10px 90px;
+}
+
+.carrito-resumen {
+    order: -1;
+}
+
+.carrito-item {
+    flex-direction: row;
+}
+
+.carrito-img {
+    width: 80px;
+    height: 80px;
+}
+
+/* ===== TICKET ===== */
+.ticket-acciones {
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.ticket-acciones .btn-admin {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ===== ADMIN LOGIN ===== */
+.login-form {
+    width: 90% !important;
+    margin: 0 auto;
+}
+
+.index-section {
+    align-items: center;
+    justify-content: center;
+}
+
+/* ===== ADMIN DASHBOARD ===== */
+.admin-main {
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.admin-section {
+    width: 100%;
+    padding: 0;
+}
+
+.admin-box {
+    width: 100%;
+    padding: 1rem;
+}
+
+.admin-table th, .admin-table td {
+    font-size: 0.75rem;
+    padding: 0.35rem;
+    vertical-align: middle;
+}
+
+.admin-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+
+.admin-footer-actions {
+    flex-direction: column;
+    gap: 1rem;
+    width: 90%;
+}
+
+.btn-admin-secondary {
+    width: 100%;
+    text-align: center;
+}
+
+/* ===== PAGINACIÓN ===== */
+.paginacion {
+    gap: 10px;
+}
+
+.anterior,
+.siguiente {
+    padding: 8px 14px;
+    font-size: 14px;
+}
+}
+
+@media (max-width: 480px) {
+
+#lista-productos {
+    grid-template-columns: 1fr;
+}
+
+.card-img-wrap {
+    height: 230px;
+}
+
+.carrito-item {
+    flex-direction: column;
+    align-items: center;
+}
+
+.carrito-img {
+    width: 100%;
+    max-width: 220px;
+    height: 160px;
+}
+
+.ticket-tabla th,
+.ticket-tabla td {
+    font-size: 0.85rem;
+}
 }

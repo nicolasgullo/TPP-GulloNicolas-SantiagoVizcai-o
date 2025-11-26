@@ -2,7 +2,6 @@ function cargarTicket() {
     const nombreCliente = localStorage.getItem("clienteNombre") || "Cliente";
     const carritoStr = localStorage.getItem("ticketCarrito");
     const totalStr = localStorage.getItem("ticketTotal") || "0";
-
     const nombreSpan = document.getElementById("ticket-nombre-cliente");
     const fechaSpan = document.getElementById("ticket-fecha");
     const totalSpan = document.getElementById("ticket-total");
@@ -111,7 +110,46 @@ btnDescargarPdf.addEventListener("click", async () => {
     }
 });
 
-btnSalir.addEventListener("click", () => {
+btnSalir.addEventListener("click", async () => {
+    const nombreComprador = localStorage.getItem("clienteNombre") || "Cliente";
+    const carritoStr = localStorage.getItem("ticketCarrito");
+    const totalStr = localStorage.getItem("ticketTotal") || "0";
+
+    let carrito = [];
+    try {
+        carrito = carritoStr ? JSON.parse(carritoStr) : [];
+    } catch (e) {
+        carrito = [];
+    }
+
+    const productos = carrito.map((item) => ({
+        productoId: item.id,
+        cantidad: item.cantidad,  
+        precioUnitario: item.precio,
+    }));
+
+    try {
+        if (productos.length > 0) {
+            await fetch("/api/ventas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    nombreComprador,
+                    fecha: new Date(),
+                    total: Number(totalStr) || 0,
+                    productos,
+                }),
+            });
+        }
+    } catch (err) {
+        console.error("Error registrando venta:", err);
+    }
+
+    localStorage.setItem("tema", "claro");
+    document.body.classList.remove("dark-theme");
+
     localStorage.removeItem("ticketCarrito");
     localStorage.removeItem("ticketTotal");
     localStorage.removeItem("carrito");

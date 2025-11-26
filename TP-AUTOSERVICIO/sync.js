@@ -3,7 +3,6 @@ import "./models/index.js";
 
 const sincronizar = async () => {
     try {
-        console.log("Sincronizando tablas...");
         await sequelize.sync({ alter: true });
         console.log("Tablas creadas/actualizadas correctamente");
     } catch (error) {
